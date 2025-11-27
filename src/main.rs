@@ -1,21 +1,13 @@
 use std::io::Write;
 
-use crate::embeddings::Embeddings;
-use crate::llm::{LLM, EMBEDDING_DIM, HIDDEN_DIM, MAX_SEQ_LEN};
-use crate::output_projection::OutputProjection;
-use crate::transformer::TransformerBlock;
-use crate::vocab::Vocab;
+use llm::{
+    EMBEDDING_DIM, HIDDEN_DIM, MAX_SEQ_LEN, Dataset, DatasetType,
+    Embeddings, LLM, OutputProjection, TransformerBlock, Vocab,
+};
 
-mod adam;
-mod dataset_loader;
-mod embeddings;
-mod feed_forward;
-mod layer_norm;
-mod llm;
-mod output_projection;
-mod self_attention;
-mod transformer;
-mod vocab;
+// We use the library crate (`llm`) defined in `src/lib.rs` instead of re-declaring
+// modules inside the binary. The library re-exports Dataset/DatasetType and the
+// configuration constants (MAX_SEQ_LEN, EMBEDDING_DIM, HIDDEN_DIM).
 
 fn main() {
     // Mock input used to test the model before and after training
